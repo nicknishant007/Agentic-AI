@@ -1,24 +1,57 @@
 from dotenv import load_dotenv
-load_dotenv()  # Load environment variables from .env file
+load_dotenv()
+import time
 
-import os
 from langchain.chat_models import init_chat_model
 
-os.environ["OPENAI_API_KEY"] = "sk-..."
+try:
 
-model = init_chat_model(
-    model="gpt-5.4",
-    temperature=0.5,
-    max_tokens=2048,
-    timeout=15,
-    max_retries=3,
-    streaming=False,)  
+    # Initialize model
+    model = init_chat_model(
+        model="gemini-2.5-flash",
+        model_provider="google_genai",
+        temperature=1,      # lower = more focused
+        max_tokens=1500,       # limits response size
+        timeout=10,
+        max_retries=3,
+        streaming=True
+    )
 
-conversation =[
-    {"role": "system", "content": "You are a helpful assistant."},
-    {"role": "user", "content": "What is the capital of France?"},
-    {"role": "assistant", "content": "The capital of France is Paris."}
-    ] 
+    # Better prompt structure
+    messages = [
+        (
+            "system",
+            "You are a concise AI assistant. "
+            "Keep answers short, clear, and useful."
+        ),
+        (
+            "human",
+            "Write  a poem on AI in the style of Shakespeare."
+        )
+    ]
 
-response = model.chat("What is the capital of France?")
-print(response)
+    print("✅ API Connected Successfully\n")
+    print("🤖 AI Response:\n")
+    
+    #Stat
+    start_time = time.time()
+
+    # STREAMING RESPONSE
+    for chunk in model.stream(messages):
+
+        # Print tokens live
+        if chunk.content:
+            print(chunk.content, end="", flush=True)
+    #End
+    end_time = time.time()
+
+    #Latency
+    latency = end_time - start_time
+    print(f"\n\n⏱️ Response Time: {latency:.2f} seconds")
+
+    print("\n")
+
+except Exception as e:
+
+    print("\n❌ API Connection Failed")
+    print("Error:", e)
