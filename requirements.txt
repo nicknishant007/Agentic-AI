@@ -1,25 +1,128 @@
+# =========================
+# FASTAPI + SERVER
+# =========================
+
 fastapi
-uvicorn
+uvicorn[standard]
+python-multipart
+websockets
+httpx
+
+# =========================
+# ENVIRONMENT + CONFIG
+# =========================
+
 python-dotenv
 pydantic
+pydantic-settings
 
+# =========================
+# LANGCHAIN CORE
+# =========================
+
+langchain
+langchain-core
+langchain-community
+langchain-text-splitters
+
+# =========================
+# LLM PROVIDERS
+# =========================
+
+langchain-openai
+langchain-google-genai
+langchain-groq
+langchain-mistralai
 litellm
 openai
 
-langchain
-langchain-community
+# =========================
+# HUGGING FACE
+# =========================
 
-chromadb
+transformers
+torch
+accelerate
+sentencepiece
+huggingface-hub
+langchain-huggingface
 sentence-transformers
 
+# =========================
+# VECTOR DATABASES
+# =========================
+
+chromadb
+faiss-cpu
+
+# =========================
+# DOCUMENT LOADERS
+# =========================
+
 pypdf
+pymupdf
+unstructured
+python-docx
+
+# =========================
+# DATABASE
+# =========================
 
 sqlalchemy
 psycopg2-binary
+alembic
+
+# =========================
+# AUTHENTICATION + SECURITY
+# =========================
 
 passlib
 bcrypt
 python-jose
 
-python-multipart
-websockets
+# =========================
+# TOKENIZATION
+# =========================
+
+tiktoken
+
+# =========================
+# MEMORY + CACHE
+# =========================
+
+redis
+
+# =========================
+# AI OBSERVABILITY
+# =========================
+
+langsmith
+
+# =========================
+# DATA PROCESSING
+# =========================
+
+numpy
+pandas
+
+# =========================
+# EVALUATION
+# =========================
+
+ragas
+datasets
+
+# =========================
+# UTILITIES
+# =========================
+
+tqdm
+colorama
+rich
+
+# =========================
+# NOTEBOOKS
+# =========================
+
+jupyter
+ipykernel
